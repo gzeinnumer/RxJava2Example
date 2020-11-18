@@ -102,6 +102,12 @@ private void setView(){
 }
 ```
 
+- Preview
+
+<p align="center">
+  <img src="https://github.com/gzeinnumer/RxJava2Example/blob/master/preview/example1.jpg" width="400"/>
+</p>
+
 ---
 
 **FullCode [MainActivity](https://github.com/gzeinnumer/RxJava2Example/blob/master/app/src/main/java/com/gzeinnumer/rxjava2example/MainActivity.java)**
