@@ -26,6 +26,45 @@ public class MainActivity extends AppCompatActivity {
         tv = findViewById(R.id.tv);
 
         initRX();
+        initRXSimple();
+    }
+
+    private void initRXSimple() {
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<String> emitter) throws Exception {
+                str.append("2. Value Default").append("\n");
+                setView();
+
+                emitter.onNext("Hello Zein");
+//                emitter.onNext(null); // contoh error
+                emitter.onComplete();
+            }
+        }).subscribe(new Observer<String>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                str.append("1. Loading onSubscribe").append("\n");
+                setView();
+            }
+
+            @Override
+            public void onNext(@NonNull String s) {
+                str.append("3. onNext ").append(s).append("\n");
+                setView();
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                str.append("3. onError ").append(e.getMessage()).append("\n");
+                setView();
+            }
+
+            @Override
+            public void onComplete() {
+                str.append("4. Loading onComplete").append("\n");
+                setView();
+            }
+        });
     }
 
     private void initRX() {
@@ -33,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void subscribe(@NonNull ObservableEmitter<String> emitter) throws Exception {
                 str.append("2. Value Default").append("\n");
-                setValue();
+                setView();
 
                 emitter.onNext("Hello Zein");
 //                emitter.onNext(null); // contoh error
@@ -44,31 +83,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 str.append("1. Loading onSubscribe").append("\n");
-                setValue();
+                setView();
             }
 
             @Override
             public void onNext(@NonNull String s) {
                 str.append("3. onNext ").append(s).append("\n");
-                setValue();
+                setView();
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
                 str.append("3. onError ").append(e.getMessage()).append("\n");
-                setValue();
+                setView();
             }
 
             @Override
             public void onComplete() {
                 str.append("4. Loading onComplete").append("\n");
-                setValue();
+                setView();
             }
         };
         observaBLE.subscribe(obserVER);
     }
 
-    private void setValue(){
+    private void setView(){
         tv.setText(str.toString());
     }
 }
